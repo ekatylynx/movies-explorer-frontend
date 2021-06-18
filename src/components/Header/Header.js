@@ -1,22 +1,17 @@
+import Navigation from "../Navigation/Navigation";
 import './Header.css';
-import logo_one from '../../images/logo.svg';
+import logoOne from '../../images/logotypeHeader.svg';
 
 function Header() {
   return (
-        <header className="header">
+        <section className="header">
+          <div className="header__container">
             <img className="header__logo" 
-            src={logo_one}
+            src={logoOne}
             alt="Логотип сайта" />
-            <ul className="header-navigation">
-              <li className="header-navigation__li">
-                <a className="header-navigation__link" href="2">Регистрация</a>
-              </li>
-
-              <li className="header-navigation__li">
-                <a className="header-navigation__link" href="2">Войти</a>
-              </li>
-            </ul>
-        </header>
+            <Navigation />
+          </div>
+        </section>
   );
 }
 
