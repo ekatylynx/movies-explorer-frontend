@@ -2,7 +2,7 @@
   background-color: #073042;
   margin: 0;
   padding: 0;
-  height: 574px;
+  padding-bottom: 76px;
 }
 
 .promo__wrapper {
@@ -66,9 +66,6 @@
 /*МЕДИА ЗАПРОСЫ ДЛЯ АДАПТИВА*/
 
 @media screen and (max-width: 1140px) {
-  .promo {
-    height: 850px;
-  }
   .promo__wrapper {
     display: flex;
     flex-direction: column;
@@ -106,13 +103,14 @@
   }
   .promo__button {
     order: 3;
-    margin-top: 146px;
+    margin-top: 92px;
+    margin-bottom: 10px;
   }
 }
 
 @media screen and (max-width: 681px) {
   .promo {
-    height: auto;
+    padding-bottom: 30px;
   }
   .promo__logo {
     width: 210px;
@@ -123,13 +121,15 @@
     width: 300px;
     height: 114px;
     margin-top: 44px;
-    font-size: 30px;
-    line-height: 38px;
+    font-size: 28px;
+    line-height: 36px;
   }
   .promo__subtitle {
     margin-top: 24px;
   }
   .promo__button {
     margin-top: 80px;
+    margin-bottom: 0;
   }
 }
+
