@@ -1,13 +1,14 @@
 import React from "react";
 // import logo from '../../logo.svg';
 import Header from '../../components/Header/Header';
+import Promo from '../../components/Promo/Promo';
 import './App.css';
 
 function App() {
   return (
          <div className="page">
          <Header />
-         <h2>Тест</h2>
+         <Promo />
             {/* <Header/> */}
             {/* Футер */}
         </div>
