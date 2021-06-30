@@ -37,11 +37,10 @@
 }
 
 .technologies-cards {
-
+  
 }
 
 .technologies-card__item {
-  display: block;
   width: 90px;
   height: 60px;
   background-color: #E8E8E8;
