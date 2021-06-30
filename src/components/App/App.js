@@ -3,6 +3,7 @@ import React from "react";
 import Header from '../../components/Header/Header';
 import Promo from '../../components/Promo/Promo';
 import NavTab from '../../components/NavTab/NavTab';
+import AboutProject from '../../components/AboutProject/AboutProject';
 import './App.css';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
          <Header />
          <Promo />
          <NavTab />
+         <AboutProject />
             {/* <Header/> */}
             {/* Футер */}
         </div>
