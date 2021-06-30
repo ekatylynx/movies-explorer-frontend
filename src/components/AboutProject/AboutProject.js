@@ -36,11 +36,6 @@ function AboutProject() {
                   <p className="technologies-card__text">mongoDB</p>
                 </li>
               </ul>
-
-              <div className="navtab-progress-bar__wrapper">
-              </div>
-
-
           </div>
         </section>
   );
