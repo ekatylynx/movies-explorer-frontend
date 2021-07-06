@@ -8,6 +8,9 @@ IP frontend-project [Link web](https://facebook.github.io/create-react-app/docs/
 
 Maкет дизайна сайта (figma) [Figma layout website](https://www.figma.com/file/vkYPrriRBnqULtY8IGElVi/Diplomas?node-id=344%3A0).
 
+Сжатие картинок SVG [Link web](https://vecta.io/nano).
+
+
 ## Tools: 
 
 * Java Script (React.js) 

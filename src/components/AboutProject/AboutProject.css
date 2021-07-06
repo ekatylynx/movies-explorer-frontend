@@ -25,6 +25,7 @@
   font-weight: 400;
   font-size: 50px;
   line-height: 58px;
+  text-align: center;
 }
 
 .technologies__subtitle {
@@ -35,6 +36,7 @@
   line-height: 20px;
   width: 460px;
   margin-bottom: 100px;
+  text-align: center;
 }
 
 .technologies-cards {
@@ -58,6 +60,7 @@
   align-items: center;
   border-radius: 10px;
   margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 .technologies-card__item:last-child {
@@ -93,9 +96,6 @@
 }
 
 @media screen and (max-width: 747px) {
-  .technologies-card__item {
-    margin-bottom: 10px;
-  }
   .technologies-card__item:last-child {
     margin-right: 0;
   }
