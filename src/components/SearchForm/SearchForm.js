@@ -23,7 +23,6 @@ function SearchForm() {
           />
         </div>
 
-        <span className="search__form-error">Нужно ввести ключевое слово</span>
         <div className="search__toggle-wrapper">
           <input className="search__toggle" type="checkbox" />
           <label className="search__toggle-text">Короткометражки</label>

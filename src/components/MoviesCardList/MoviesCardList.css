@@ -78,6 +78,11 @@
 
 .card-movies__button-like:hover {
   background-color: #e4e4e4;
+  background-image: url("../../images/icon-remove.svg");
+}
+
+.card-movies__button-like_type_unlike {
+  background-image: url("../../images/icon-like-white.svg");
 }
 
 .moviesgallery__wrapper-button {

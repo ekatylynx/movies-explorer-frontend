@@ -30,7 +30,7 @@ function MoviesCardList({ favourite }) {
               />
               <div className="card-movies__wrapper-title">
                 <h2 className="card-movies__title">33 слова о дизайне</h2>
-                <button className="card-movies__button-like"></button>
+                <button className="card-movies__button-like card-movies__button-like_type_unlike"></button>
               </div>
               <div className="card-movies__line" />
               <span className="card-movies__time">1ч 42м</span>
@@ -74,7 +74,7 @@ function MoviesCardList({ favourite }) {
               />
               <div className="card-movies__wrapper-title">
                 <h2 className="card-movies__title">33 слова о дизайне</h2>
-                <button className="card-movies__button-like"></button>
+                <button className="card-movies__button-like card-movies__button-like_type_unlike"></button>
               </div>
               <div className="card-movies__line" />
               <span className="card-movies__time">1ч 42м</span>
