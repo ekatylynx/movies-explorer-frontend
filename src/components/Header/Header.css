@@ -1,0 +1,51 @@
+.header {
+  display: flex;
+  background-color: #073042;
+  height: 74px;
+}
+
+.header_type_logined {
+  background-color: white;
+}
+
+/*ХЕДЕР КОНТЕЙНЕР ДЛЯ calc и цветной шапки*/
+
+.header__container {
+  width: calc(100% - 72px * 2);
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* ЛОГОТИП */
+
+.header__logo {
+  width: 38px;
+  height: 38px;
+  opacity: 1;
+  transition: opacity .2s;
+}
+
+/*МЕДИА ЗАПРОСЫ ДЛЯ АДАПТИВА*/
+
+@media screen and (max-width: 991px) {
+  .header__container {
+    width: calc(100% - 30px * 2);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header__container {
+    width: calc(100% - 14px * 2);
+  }
+
+  .header-navigation__li {
+    margin-left: 14px;
+  }
+}
+
+.header__logo:hover {
+  opacity: .8;
+}

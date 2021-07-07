@@ -1,0 +1,89 @@
+.popup-form {
+  margin: 0 auto;
+  padding: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-form__input {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 27px;
+  padding-left: 6px;
+  display: block;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid gray;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 396px;
+  margin: 0 auto;
+}
+
+.auth-form__title {
+  padding: 0;
+  margin: 0;
+  color: black;
+  font-weight: 500  ;
+  font-size: 24px;
+  line-height: 29px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  width: 100%;
+}
+.popup-form__input_type_auth {
+  background: transparent;
+  border-bottom: 1px solid rgba(204, 204, 204, 1);
+  padding-bottom: 13px;
+  padding-left: 0;
+  color: black;
+  outline:none;
+}
+
+.form-error {
+  font-size: 10px;
+  line-height: 12px;
+  color: #FF3055;
+  display: block;
+  box-sizing: border-box;
+  height: 12px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.popup-form__input_type_auth::placeholder {
+  color: rgba(204, 204, 204, 1);
+}
+
+.popup-form__input_type_auth:focus{
+  border-bottom: 2px solid #3456F3;
+}
+
+.popup-form__input_type_invalid {
+  border-bottom: 2px solid #FF3055;
+}
+
+@media screen and (max-width: 470px) {
+  .auth-form {
+    width: 260px;
+  }
+  .popup-form__btn-submit {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

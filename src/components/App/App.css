@@ -1,0 +1,8 @@
+body {
+  font-family: "Inter", "Arial", sans-serif;
+}
+
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+}
