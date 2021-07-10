@@ -4,7 +4,9 @@
 
 ## Learn More
 
-IP frontend-project [Link web](https://facebook.github.io/create-react-app/docs/getting-started).
+[IP api backend](https://api.ekate.students.nomoredomains.monster/).
+
+[IP frontend](https://ekate.student.nomoredomains.rocks/).
 
 Maкет дизайна сайта (figma) [Figma layout website](https://www.figma.com/file/vkYPrriRBnqULtY8IGElVi/Diplomas?node-id=344%3A0).
 
