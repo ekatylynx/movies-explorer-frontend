@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
 import "./Navigation.css";
 import accountIcon from "../../images/account-icon.svg";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function Navigation({ logined }) {
+const Navigation = ({ dark }) => {
   const [isMobile, setMobile] = useState(false);
   const [gamburger, setGamburger] = useState(false);
+  const logined = useContext(CurrentUserContext);
 
   useEffect(() => {
     // При монтировании компонента
@@ -43,31 +45,32 @@ function Navigation({ logined }) {
           <div
             onClick={() => setGamburger(false)}
             className={
-              "gamburger-overlay" + (gamburger ? " gamburger-overlay_opened" : "")
+              "gamburger-overlay" +
+              (gamburger ? " gamburger-overlay_opened" : "")
             }
           ></div>
           <div className={"gamburger" + (gamburger ? " gamburger_show" : "")}>
             <div className="gamburger__wrapper">
               <div className="gamburger__wrapper-link">
-                <Link className="gamburger__link" to="/">
+                <NavLink exact={true} className="gamburger__link" activeClassName="header-navigation__link_active" to="/">
                   Главная
-                </Link>
-                <Link className="gamburger__link" to="/movies">
+                </NavLink>
+                <NavLink className="gamburger__link" activeClassName="header-navigation__link_active" to="/movies">
                   Фильмы
-                </Link>
-                <Link className="gamburger__link" to="/saved-movies">
+                </NavLink>
+                <NavLink className="gamburger__link" activeClassName="header-navigation__link_active" to="/saved-movies">
                   Сохранённые фильмы
-                </Link>
+                </NavLink>
               </div>
               <div className="gamburger__wrapper-link-account">
-                <Link to="/profile" className="gamburger__link">
+                <NavLink to="/profile" className="gamburger__link" activeClassName="header-navigation__link_active">
                   Аккаунт
                   <img
                     className="header-navigation__image-logined"
                     src={accountIcon}
                     alt="account icon"
                   />
-                </Link>
+                </NavLink>
               </div>
             </div>
           </div>
@@ -80,26 +83,44 @@ function Navigation({ logined }) {
             <>
               <ul className="header-navigation-logined">
                 <li className="header-navigation__li-logined">
-                  <Link
+                  <NavLink
                     to="/movies"
-                    className="header-navigation__link-logined"
+                    activeClassName="header-navigation__link_active"
+                    className={
+                      "header-navigation__link-logined" +
+                      (dark
+                        ? " header-navigation__link-logined_style_white"
+                        : "")
+                    }
                   >
                     Фильмы
-                  </Link>
-                  <Link
+                  </NavLink>
+                  <NavLink
                     to="/saved-movies"
-                    className="header-navigation__link-logined"
+                    activeClassName="header-navigation__link_active"
+                    className={
+                      "header-navigation__link-logined" +
+                      (dark
+                        ? " header-navigation__link-logined_style_white"
+                        : "")
+                    }
                   >
                     Сохранённые фильмы
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
 
               <ul className="header-navigation_type_logined">
                 <li className="header-navigation__li-logined">
-                  <Link
+                  <NavLink
                     to="/profile"
-                    className="header-navigation__link-logined header-navigation__link-logined_type_account"
+                    activeClassName="header-navigation__link_active"
+                    className={
+                      "header-navigation__link-logined header-navigation__link-logined_type_account" +
+                      (dark
+                        ? " header-navigation__link-logined_style_white"
+                        : "")
+                    }
                   >
                     Аккаунт
                     <img
@@ -107,7 +128,7 @@ function Navigation({ logined }) {
                       src={accountIcon}
                       alt="account icon"
                     />
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
             </>
@@ -133,6 +154,6 @@ function Navigation({ logined }) {
       )}
     </>
   );
-}
+};
 
 export default Navigation;

@@ -36,6 +36,7 @@
   font-size: 13px;
   line-height: 16px;
   color: black;
+  max-width: 260px;
 }
 
 .card-movies__line {
@@ -61,7 +62,10 @@
   margin-bottom: 29px;
   align-items: center;
   justify-content: space-between;
+  height: 32px;
 }
+
+/* // Обычное состояние с возможностью лайка на наведении */
 
 .card-movies__button-like {
   width: 24px;
@@ -69,7 +73,7 @@
   border-radius: 50%;
   border: none;
   background-color: #F9F9F9;
-  background-image: url("../../images/icon-like.svg");
+  background-image: url("../../images/icon-like-white.svg");
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
@@ -78,11 +82,17 @@
 
 .card-movies__button-like:hover {
   background-color: #e4e4e4;
-  background-image: url("../../images/icon-remove.svg");
+  background-image: url("../../images/icon-like.svg");
 }
 
-.card-movies__button-like_type_unlike {
-  background-image: url("../../images/icon-like-white.svg");
+/* // Лайкнутое состояние с возможностью удаления на наведении */
+
+.card-movies__button-like_type_unliked {
+  background-image: url("../../images/icon-like.svg");
+}
+
+.card-movies__button-like_type_unliked:hover {
+  background-image: url("../../images/icon-remove.svg");
 }
 
 .moviesgallery__wrapper-button {

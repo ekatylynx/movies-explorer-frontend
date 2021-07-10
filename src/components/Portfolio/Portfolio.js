@@ -2,7 +2,7 @@ import React from "react";
 import "./Portfolio.css";
 import arrowLink from "../../images/arrow-link.svg";
 
-function Portfolio() {
+const Portfolio = () => {
   return (
     <section className="portfolio">
       <div className="portfolio__wrapper-section">
@@ -45,6 +45,6 @@ function Portfolio() {
       </div>
     </section>
   );
-}
+};
 
 export default Portfolio;

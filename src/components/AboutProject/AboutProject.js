@@ -1,7 +1,7 @@
 import React from "react";
 import "./AboutProject.css";
 
-function AboutProject() {
+const AboutProject = () => {
   return (
     <section className="technologies">
       <div className="technologies__wrapper">
@@ -40,6 +40,6 @@ function AboutProject() {
       </div>
     </section>
   );
-}
+};
 
 export default AboutProject;

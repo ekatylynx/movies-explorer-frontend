@@ -1,8 +1,8 @@
 import React from "react";
-import { withRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./NotFound.css";
 
-function NotFound() {
+const NotFound = () => {
   return (
     <div className="notfound__wrapper">
       <div className="notfound">
@@ -16,6 +16,6 @@ function NotFound() {
       </div>
     </div>
   );
-}
+};
 
-export default withRouter(NotFound);
+export default NotFound;

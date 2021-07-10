@@ -1,11 +1,12 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import "./NavTab.css";
 
-function NavTab() {
+const NavTab = () => {
   return (
     <section className="navtab">
       <div className="navtab__wrapper">
-        <h2 className="navtab__title">О проекте</h2>
+        <a name="about-project" className="navtab__title">О проекте</a>
         <div className="navtab__line"></div>
 
         <ul className="navtab-cards">
@@ -55,6 +56,6 @@ function NavTab() {
       </div>
     </section>
   );
-}
+};
 
 export default NavTab;

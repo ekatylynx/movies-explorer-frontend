@@ -91,6 +91,12 @@
   justify-content: center;
   margin-top: 15px;
   margin-bottom: 119px;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+
+  cursor: pointer;
 }
 
 /* Тоггл в обычном состоянии */
@@ -104,12 +110,12 @@
   top: 0;
   left: 0;
   outline: none;
-  cursor: pointer;
   border-radius: 20px;  
   appearance: none;
   -webkit-appearance: none;
   transition-timing-function: ease-in;
   transition-duration: .4s;
+  cursor: pointer;
 }
 
 /* Кружочек в обычном состоянии */
@@ -147,11 +153,11 @@
 
 /* Лейбл-текст для тогла */
 
-.search__toggle-text {
+/* .search__toggle-text {
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
-}
+} */
 
 @media screen and (max-width: 768px) {
   .search__form {
