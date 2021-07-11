@@ -3,12 +3,29 @@ import Header from "../Header/Header";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import MoviesCardList from "../../components/MoviesCardList/MoviesCardList";
 import Footer from "../../components/Footer/Footer";
+import { SHORT_MAX_LENGTH } from "../../utils/constants";
 
 const SavedMovies = ({ onDeleteMovie, myMovies, setMyMovies, getMyMovies }) => {
-  const [search, setSearch] = useState("");
-  const [toggle, setToggle] = useState(false);
+  const [search, _setSearch] = useState(
+    localStorage.getItem("myMoviesSearch") || ""
+  );
+  const [toggle, _setToggle] = useState(
+    localStorage.getItem("myMoviesToggle") === "true" || false
+  );
   const [filteredMovies, setFilteredMovies] = useState([]);
-  const [busy, setBusy] = useState(true);
+  const [busy, setBusy] = useState(false);
+
+  const setSearch = (text) => {
+    localStorage.setItem("myMoviesSearch", text);
+    _setSearch(text);
+  };
+
+  const setToggle = () => {
+    _setToggle((b) => {
+      localStorage.setItem("myMoviesToggle", !b);
+      return !b;
+    });
+  };
 
   useEffect(() => {
     if (myMovies) {
@@ -17,7 +34,7 @@ const SavedMovies = ({ onDeleteMovie, myMovies, setMyMovies, getMyMovies }) => {
           ? myMovies.filter((item) => {
               return (
                 item.nameRU.toLowerCase().includes(search.toLowerCase()) &&
-                (toggle ? item.duration <= 40 : true)
+                (toggle ? item.duration <= SHORT_MAX_LENGTH : true)
               );
             })
           : myMovies;
@@ -47,6 +64,7 @@ const SavedMovies = ({ onDeleteMovie, myMovies, setMyMovies, getMyMovies }) => {
     <>
       <Header />
       <SearchForm
+        text={search}
         setText={setSearch}
         toggle={toggle}
         setToggle={setToggle}

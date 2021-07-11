@@ -119,6 +119,11 @@
   border: none;
 }
 
+
+.gamburger__button_style_white {
+  background-image: url(../../images/gamburger-menu-white.svg);
+}
+
 .gamburger-overlay {
   position: fixed;
   width: 100%;

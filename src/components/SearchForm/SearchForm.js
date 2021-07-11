@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import "./SearchForm.css";
 
-const SearchForm = ({ setText, toggle, setToggle, busy }) => {
-  const [text, _setText] = useState("");
+const SearchForm = ({ text, setText, toggle, setToggle, busy }) => {
+  const [_text, _setText] = useState(text);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setText(text.trim());
+    setText(_text.trim());
   };
 
   return (
@@ -24,9 +24,9 @@ const SearchForm = ({ setText, toggle, setToggle, busy }) => {
             name="search"
             placeholder="Фильм"
             className="search__form-input"
-            required
+            // required
             onChange={(e) => _setText(e.target.value)}
-            value={text}
+            value={_text}
             disabled={busy}
           />
         </div>
@@ -36,7 +36,7 @@ const SearchForm = ({ setText, toggle, setToggle, busy }) => {
             className="search__toggle"
             type="checkbox"
             checked={toggle}
-            onChange={() => setToggle(t => !t)}
+            onChange={() => setToggle()}
           />
           Короткометражки
         </label>

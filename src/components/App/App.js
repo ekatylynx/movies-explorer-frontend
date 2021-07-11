@@ -27,6 +27,19 @@ const App = (props) => {
         .then((res) => {
           if (res) {
             setCurrentUser(res);
+
+            const savedExternalMovies = JSON.parse(
+              localStorage.getItem("externalMovies")
+            );
+            if (savedExternalMovies && Array.isArray(savedExternalMovies)) {
+              setExternalMovies(savedExternalMovies);
+            }
+
+            const savedMyMovies = JSON.parse(localStorage.getItem("myMovies"));
+            if (savedMyMovies && Array.isArray(savedMyMovies)) {
+              setMyMovies(savedMyMovies);
+            }
+
             props.history.push("/movies");
           }
         })
@@ -61,9 +74,17 @@ const App = (props) => {
     e.preventDefault();
 
     localStorage.removeItem("jwt");
-    localStorage.removeItem("myMovies");
-    localStorage.removeItem("externalMovies");
     setCurrentUser();
+    localStorage.removeItem("myMovies");
+    setMyMovies();
+    localStorage.removeItem("externalMovies");
+    setExternalMovies();
+
+    localStorage.removeItem("externalMoviesSearch");
+    localStorage.removeItem("externalMoviesToggle");
+    localStorage.removeItem("myMoviesSearch");
+    localStorage.removeItem("myMoviesToggle");
+    
     setLoggedIn(false);
     props.history.push("/");
     setPopup({ type: "success", text: "Вы успешно вышли" });
@@ -78,7 +99,7 @@ const App = (props) => {
   };
 
   const handleRegister = (password, email, name) => {
-    MainApi.register(password, email, name)
+    return MainApi.register(password, email, name)
       .then((res) => {
         setPopup({ type: "success", text: "Вы успешно зарегистрировались" });
         props.history.push("/signin");
@@ -100,7 +121,7 @@ const App = (props) => {
   };
 
   const handleUpdateUser = (data) => {
-    MainApi.setUser(data)
+    return MainApi.setUser(data)
       .then((data) => {
         setCurrentUser(data);
         setPopup({ type: "success", text: "Профиль успешно сохранен" });
@@ -138,7 +159,7 @@ const App = (props) => {
     return new Promise((resolve, reject) => {
       const saved = JSON.parse(localStorage.getItem("externalMovies"));
 
-      if (saved && Array.isArray(saved) && saved.length > 0) {
+      if (saved && Array.isArray(saved)) {
         resolve(saved);
       } else {
         getMovies()
@@ -158,7 +179,7 @@ const App = (props) => {
     return new Promise((resolve, reject) => {
       const saved = JSON.parse(localStorage.getItem("myMovies"));
 
-      if (saved && Array.isArray(saved) && saved.length > 0) {
+      if (saved && Array.isArray(saved)) {
         resolve(saved);
       } else {
         MainApi.getMovies()

@@ -1,22 +1,25 @@
-import React, { useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Profile.css";
 import Header from "../Header/Header";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 
 const Profile = ({ logOut, onUpdateUser }) => {
+  const [busy, setBusy] = useState(false);
   const currentUser = useContext(CurrentUserContext);
-  // eslint-disable-next-line
-  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation({ name: currentUser.name, email: currentUser.email });
-  
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation({ name: currentUser.name, email: currentUser.email });
+
   useEffect(() => {
     return () => resetForm();
   }, [resetForm]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setBusy(true);
     const { name, email } = values;
-    onUpdateUser({ name, email });
+    onUpdateUser({ name, email })
+      .finally(() => setBusy(false));
   };
 
   return (
@@ -38,6 +41,7 @@ const Profile = ({ logOut, onUpdateUser }) => {
                 minLength="2"
                 maxLength="30"
                 required
+                disabled={busy}
               ></input>
             </label>
             <span className="form-error">{errors.name}</span>
@@ -51,12 +55,24 @@ const Profile = ({ logOut, onUpdateUser }) => {
                 value={values.email || ""}
                 onChange={handleChange}
                 required
+                disabled={busy}
               ></input>
             </label>
             <span className="form-error">{errors.email}</span>
             <div className="profile-form__button-wrapper">
-              <input type="submit" className={"profile-form__button profile-form__button_type_edit-profile" + (!isValid ? " auth-form__btn-submit_type_disabled" : "")} value="Редактировать" disabled={!isValid} />
-              <button className="profile-form__button profile-form__button_type_signout" onClick={logOut}>
+              <input
+                type="submit"
+                className={
+                  "profile-form__button profile-form__button_type_edit-profile" +
+                  (!isValid ? " auth-form__btn-submit_type_disabled" : "")
+                }
+                value={!busy ? "Редактировать" : "Пожалуйста подождите..."}
+                disabled={!isValid || busy}
+              />
+              <button
+                className="profile-form__button profile-form__button_type_signout"
+                onClick={logOut}
+              >
                 Выйти из аккаунта
               </button>
             </div>
@@ -65,6 +81,6 @@ const Profile = ({ logOut, onUpdateUser }) => {
       </section>
     </>
   );
-}
+};
 
 export default Profile;

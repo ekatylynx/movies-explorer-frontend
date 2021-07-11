@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Register.css";
 import logoOne from "../../images/logotypeHeader.svg";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 
-const Register = (props) => {
+const Register = ({ onRegiter }) => {
+  const [busy, setBusy] = useState(false);
   const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation();
 
@@ -14,7 +15,12 @@ const Register = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.onRegiter(values.password, values.email, values.name);
+
+    setBusy(true);
+
+    onRegiter(values.password, values.email, values.name).finally(() =>
+      setBusy(false)
+    );
   };
 
   return (
@@ -50,6 +56,7 @@ const Register = (props) => {
             minLength="2"
             maxLength="30"
             required
+            disabled={busy}
           />
         </label>
 
@@ -65,6 +72,7 @@ const Register = (props) => {
             value={values.email || ""}
             onChange={handleChange}
             required
+            disabled={busy}
           />
         </label>
 
@@ -82,6 +90,7 @@ const Register = (props) => {
             onChange={handleChange}
             autoComplete="on"
             required
+            disabled={busy}
           />
         </label>
 
@@ -91,11 +100,11 @@ const Register = (props) => {
           type="submit"
           className={
             "auth-form__btn-submit auth-form__btn-submit_theme_white" +
-            (!isValid ? " auth-form__btn-submit_type_disabled" : "")
+            (!isValid || busy ? " auth-form__btn-submit_type_disabled" : "")
           }
-          disabled={!isValid}
+          disabled={!isValid || busy}
         >
-          Зарегистрироваться
+          {!busy ? "Зарегистрироваться" : "Пожалуйста подождите..."}
         </button>
         <p className="auth-form__link-wrapper">
           Уже зарегистрированы?{" "}

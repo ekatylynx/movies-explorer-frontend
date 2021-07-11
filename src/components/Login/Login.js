@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
 import logoOne from "../../images/logotypeHeader.svg";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 
-const Login = (props) => {
+const Login = ({ onLogin, history }) => {
+  const [busy, setBusy] = useState(false);
   const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation();
 
@@ -14,7 +15,11 @@ const Login = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.onLogin(values.password, values.email);
+
+    setBusy(true);
+
+    onLogin(values.password, values.email)
+      .finally(() => setBusy(false));
   };
 
   return (
@@ -47,6 +52,7 @@ const Login = (props) => {
             placeholder="email@gmail.ru"
             value={values.email || ""}
             onChange={handleChange}
+            disabled={busy}
           />
         </label>
 
@@ -64,6 +70,7 @@ const Login = (props) => {
             required
             onChange={handleChange}
             placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
+            disabled={busy}
           />
         </label>
 
@@ -73,11 +80,11 @@ const Login = (props) => {
           type="submit"
           className={
             "auth-form__btn-submit auth-form__btn-submit_theme_white" +
-            (!isValid ? " auth-form__btn-submit_type_disabled" : "")
+            (!isValid || busy ? " auth-form__btn-submit_type_disabled" : "")
           }
-          disabled={!isValid}
+          disabled={!isValid || busy}
         >
-          Войти
+          {!busy ? "Войти" : "Пожалуйста подождите..."}
         </button>
         <p className="auth-form__link-wrapper">
           Ещё не зарегистрированы?{" "}

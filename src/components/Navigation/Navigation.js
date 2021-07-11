@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import "./Navigation.css";
 import accountIcon from "../../images/account-icon.svg";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { GAMBURGER_SHOW_WIDTH } from "../../utils/constants";
 
 const Navigation = ({ dark }) => {
   const [isMobile, setMobile] = useState(false);
@@ -36,7 +37,7 @@ const Navigation = ({ dark }) => {
   }, [isMobile]);
 
   // Функция, определяющая мобильное отображение, записывает в стейт либо true либо false
-  const onResize = () => setMobile(window.outerWidth <= 768);
+  const onResize = () => setMobile(window.outerWidth <= GAMBURGER_SHOW_WIDTH);
 
   return (
     <>
@@ -76,7 +77,7 @@ const Navigation = ({ dark }) => {
           </div>
           {isMobile ? (
             <button
-              className="gamburger__button"
+              className={"gamburger__button" + (dark && !gamburger ? " gamburger__button_style_white" : "")}
               onClick={() => setGamburger((b) => !b)}
             ></button>
           ) : (

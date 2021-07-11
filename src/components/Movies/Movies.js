@@ -3,6 +3,7 @@ import Header from "../Header/Header";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import MoviesCardList from "../../components/MoviesCardList/MoviesCardList";
 import Footer from "../../components/Footer/Footer";
+import { SHORT_MAX_LENGTH } from "../../utils/constants";
 
 const Movies = ({
   onCreateMovie,
@@ -14,10 +15,26 @@ const Movies = ({
   getExternalMovies,
   getMyMovies,
 }) => {
-  const [search, setSearch] = useState("");
-  const [toggle, setToggle] = useState(false);
+  const [search, _setSearch] = useState(
+    localStorage.getItem("externalMoviesSearch") || ""
+  );
+  const [toggle, _setToggle] = useState(
+    localStorage.getItem("externalMoviesToggle") === "true" || false
+  );
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [busy, setBusy] = useState(false);
+
+  const setSearch = (text) => {
+    localStorage.setItem("externalMoviesSearch", text);
+    _setSearch(text);
+  };
+
+  const setToggle = () => {
+    _setToggle((b) => {
+      localStorage.setItem("externalMoviesToggle", !b);
+      return !b;
+    });
+  };
 
   // поиск и фильтрация фильмов
   useEffect(() => {
@@ -26,7 +43,7 @@ const Movies = ({
         const tmp = externalMovies.filter((item) => {
           return (
             item.nameRU.toLowerCase().includes(search.toLowerCase()) &&
-            (toggle ? item.duration <= 40 : true)
+            (toggle ? item.duration <= SHORT_MAX_LENGTH : true)
           );
         });
         setFilteredMovies(
@@ -46,6 +63,8 @@ const Movies = ({
           setMyMovies(res[1]);
         });
       }
+    } else {
+     setFilteredMovies([]);
     }
   }, [
     search,
@@ -66,6 +85,7 @@ const Movies = ({
     <>
       <Header />
       <SearchForm
+        text={search}
         setText={setSearch}
         toggle={toggle}
         setToggle={setToggle}
