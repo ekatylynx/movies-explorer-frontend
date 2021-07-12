@@ -24,11 +24,6 @@ const MoviesCardList = ({ movies, busy, onLikeMovie, onUnlikeMovie }) => {
     setPage((p) => p + 1);
   };
 
-  // let gridParams = {
-  //   init: 0,
-  //   perPage: 0,
-  // };
-
   let gridParams = GRID_FULL;
 
   if (screenWidth < 480) {
@@ -37,13 +32,10 @@ const MoviesCardList = ({ movies, busy, onLikeMovie, onUnlikeMovie }) => {
     gridParams = GRID_768;
   } else if (screenWidth >= 768 && screenWidth < 1280) {
     gridParams = GRID_1280;
-  // } else {
-  //   gridParams = GRID_FULL;
   }
 
   const { init, perPage } = gridParams;
-
-  let maxPage = movies ? (movies.length - init) / perPage : 0;
+  let maxPage = (movies.length - init) / perPage;
 
   return (
     <>
@@ -54,7 +46,7 @@ const MoviesCardList = ({ movies, busy, onLikeMovie, onUnlikeMovie }) => {
           <ul className="moviesgallery__wrapper">
             {movies
               .slice(0, init + page * perPage)
-              .map(({ isLiked, ...item }) => (
+              .map(({ isLiked, ...item }, index) => (
                 <MoviesCard
                   key={item.movieId}
                   onClickMovie={isLiked ? onUnlikeMovie : onLikeMovie}
@@ -63,7 +55,7 @@ const MoviesCardList = ({ movies, busy, onLikeMovie, onUnlikeMovie }) => {
                 />
               ))}
           </ul>
-          {maxPage > 1 && page < maxPage ? (
+          {maxPage > 0 && page < maxPage ? (
             <div className="moviesgallery__wrapper-button">
               <button
                 onClick={more}

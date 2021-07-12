@@ -20,7 +20,7 @@ export const useFormWithValidation = (v = {}) => {
     if (target.type === "email") {
       const check = validateEmail(value);
       setErrors({...errors, [name]: !check ? "Некорректный email" : "" });
-      setIsValid(check);
+      setIsValid(check && target.closest("form").checkValidity());
     } else {
       setErrors({...errors, [name]: target.validationMessage });
       setIsValid(target.closest("form").checkValidity());

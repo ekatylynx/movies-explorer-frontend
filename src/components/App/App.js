@@ -14,16 +14,37 @@ import ProtectedRoute from "../../components/ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "./App.css";
 
-const App = (props) => {
-  const [loggedIn, setLoggedIn] = useState(false);
+const App = ({ history }) => {
+  const [loggedIn, setLoggedIn] = useState(localStorage.getItem("jwt") !== null);
   const [currentUser, setCurrentUser] = useState();
   const [popup, setPopup] = useState();
   const [externalMovies, setExternalMovies] = useState();
   const [myMovies, setMyMovies] = useState();
 
+  // Выход
+  const logOut = useCallback((e) => {
+    if (e) e.preventDefault();
+
+    localStorage.removeItem("jwt");
+    setCurrentUser();
+    localStorage.removeItem("myMovies");
+    setMyMovies();
+    localStorage.removeItem("externalMovies");
+    setExternalMovies();
+
+    localStorage.removeItem("externalMoviesSearch");
+    localStorage.removeItem("externalMoviesToggle");
+    localStorage.removeItem("myMoviesSearch");
+    localStorage.removeItem("myMoviesToggle");
+    
+    setLoggedIn(false);
+    history.push("/");
+    setPopup({ type: "success", text: "Вы успешно вышли" });
+  }, [history]);
+
   const getUser = useCallback(
     (jwt) => {
-      MainApi.checkAuth(jwt)
+      return MainApi.checkAuth(jwt)
         .then((res) => {
           if (res) {
             setCurrentUser(res);
@@ -39,56 +60,23 @@ const App = (props) => {
             if (savedMyMovies && Array.isArray(savedMyMovies)) {
               setMyMovies(savedMyMovies);
             }
-
-            props.history.push("/movies");
           }
         })
         .catch((err) => {
+          logOut();
           console.log(err);
-          setPopup({
-            type: "error",
-            text: err && err.message ? err.message : "Произошла ошибка",
-          });
         });
     },
-    [props.history]
+    [logOut]
   );
 
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
 
-    if (jwt) {
+    if (loggedIn && jwt && !currentUser) {
       getUser(jwt);
     }
-  }, [getUser]);
-
-  useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (loggedIn && jwt) {
-      getUser(jwt);
-    }
-  }, [loggedIn, getUser]);
-
-  // Выход
-  const logOut = (e) => {
-    e.preventDefault();
-
-    localStorage.removeItem("jwt");
-    setCurrentUser();
-    localStorage.removeItem("myMovies");
-    setMyMovies();
-    localStorage.removeItem("externalMovies");
-    setExternalMovies();
-
-    localStorage.removeItem("externalMoviesSearch");
-    localStorage.removeItem("externalMoviesToggle");
-    localStorage.removeItem("myMoviesSearch");
-    localStorage.removeItem("myMoviesToggle");
-    
-    setLoggedIn(false);
-    props.history.push("/");
-    setPopup({ type: "success", text: "Вы успешно вышли" });
-  };
+  }, [loggedIn, getUser, currentUser]);
 
   const error = (err) => {
     console.log(err);
@@ -102,22 +90,37 @@ const App = (props) => {
     return MainApi.register(password, email, name)
       .then((res) => {
         setPopup({ type: "success", text: "Вы успешно зарегистрировались" });
-        props.history.push("/signin");
+        history.push("/signin");
       })
       .catch(error);
   };
 
   // Запрос на логин по паролю и мэйлу
   const handleLogin = (password, email) => {
-    return MainApi.login(password, email)
-      .then((res) => {
-        if (res && res.token) {
-          localStorage.setItem("jwt", res.token);
-          setLoggedIn(true);
-          setPopup({ type: "success", text: "Вы успешно вошли" });
-        }
-      })
-      .catch(error);
+    return new Promise((resolve, reject) => {
+      MainApi.login(password, email)
+        .then((res) => {
+          if (res && res.token) {
+            getUser(res.token)
+              .then((usr) => {
+                localStorage.setItem("jwt", res.token);
+                setLoggedIn(true);
+                setPopup({ type: "success", text: "Вы успешно вошли" });
+                history.push("/movies");
+
+                resolve();
+              })
+              .catch((err) => {
+                error(err);
+                reject();
+              });
+          }
+        })
+        .catch((err) => {
+          error(err);
+          reject();
+        });
+    });
   };
 
   const handleUpdateUser = (data) => {
@@ -195,6 +198,8 @@ const App = (props) => {
     });
   };
 
+  if (loggedIn && !currentUser) return null;
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       {popup ? <Popup {...popup} onClose={() => setPopup()} /> : null}
@@ -212,7 +217,7 @@ const App = (props) => {
             <Login onLogin={handleLogin} />
           </Route>
 
-          <ProtectedRoute exact path="/movies" isLoginned={currentUser}>
+          <ProtectedRoute exact path="/movies" isLoginned={loggedIn}>
             <Movies
               onCreateMovie={handlerCreateMovie}
               onDeleteMovie={handlerDeleteMovie}
@@ -225,7 +230,7 @@ const App = (props) => {
             />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/saved-movies" isLoginned={currentUser}>
+          <ProtectedRoute exact path="/saved-movies" isLoginned={loggedIn}>
             <SavedMovies
               onDeleteMovie={handlerDeleteMovie}
               myMovies={myMovies}
@@ -234,7 +239,7 @@ const App = (props) => {
             />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/profile" isLoginned={currentUser}>
+          <ProtectedRoute exact path="/profile" isLoginned={loggedIn}>
             <Profile logOut={logOut} onUpdateUser={handleUpdateUser} />
           </ProtectedRoute>
 
