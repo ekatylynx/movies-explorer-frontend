@@ -119,6 +119,11 @@
   border: none;
 }
 
+
+.gamburger__button_style_white {
+  background-image: url(../../images/gamburger-menu-white.svg);
+}
+
 .gamburger-overlay {
   position: fixed;
   width: 100%;
@@ -188,4 +193,13 @@
 .header-navigation_type_logined {
   margin: 0;
   padding: 0;
+}
+
+.header-navigation__link-logined_style_white {
+  color: white;
+}
+
+/* класс для активных ссылок */
+.header-navigation__link_active {
+  font-weight: 600;
 }

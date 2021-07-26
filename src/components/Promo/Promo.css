@@ -48,7 +48,7 @@
   height: 36px;
   font-weight: 500;
   font-size: 12px;
-  line-height: 16px;
+  line-height: 36px;
   color: white;
   background-color: transparent;
   border: 1px solid rgba(255, 255, 255, 0.6);
@@ -57,11 +57,13 @@
   display: block;
   margin-top: 146px;
   transition: background-color .3s ease-in;
+  text-align: center;
+  text-decoration: none;
 }
 
 .promo__button:hover {
   background-color:#2BE080;
-  border: none;
+  border: 1px solid #2BE080;
 }
 
 .promo__logo {

@@ -73,8 +73,12 @@
   border: 1px solid #3456F3;
 }
 
-.profile-form__label:last-of-type {
+/* .profile-form__label:last-of-type {
   margin-bottom: 220px;
+} */
+
+.profile-form__button_type_edit-profile {
+  margin-top: 190px;
 }
 
 .profile-form__button-wrapper {

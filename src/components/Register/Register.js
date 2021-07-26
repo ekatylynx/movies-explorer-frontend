@@ -1,12 +1,36 @@
-import React from "react";
-import { withRouter, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./Register.css";
 import logoOne from "../../images/logotypeHeader.svg";
+import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 
-function Register() {
+const Register = ({ onRegiter }) => {
+  const [busy, setBusy] = useState(false);
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation();
+
+  useEffect(() => {
+    return () => resetForm();
+  }, [resetForm]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    setBusy(true);
+
+    onRegiter(values.password, values.email, values.name).finally(() =>
+      setBusy(false)
+    );
+  };
+
   return (
     <div>
-      <form name="login" className="auth-form">
+      <form
+        name="login"
+        className="auth-form"
+        onSubmit={handleSubmit}
+        noValidate
+      >
         <div className="auth-form__img-wrapper">
           <Link to="/" className="auth-form__img-wrapper-link">
             <img
@@ -22,15 +46,21 @@ function Register() {
         <label className="auth-form__label">
           Имя
           <input
-            name="firstname"
+            name="name"
             className="popup-form__input popup-form__input_type_auth"
             type="text"
             placeholder="Виталий"
-            // value={firsname}
+            pattern="[а-яА-Яa-zA-ZёË\- ]{1,}"
+            value={values.name || ""}
+            onChange={handleChange}
+            minLength="2"
+            maxLength="30"
+            required
+            disabled={busy}
           />
         </label>
 
-        <span className="form-error">Неверно введено значение</span>
+        <span className="form-error">{errors.name}</span>
 
         <label className="auth-form__label">
           E-mail
@@ -39,11 +69,14 @@ function Register() {
             className="popup-form__input popup-form__input_type_auth"
             type="email"
             placeholder="email@gmail.ru"
-            // value={email}
+            value={values.email || ""}
+            onChange={handleChange}
+            required
+            disabled={busy}
           />
         </label>
 
-        <span className="form-error"></span>
+        <span className="form-error">{errors.email}</span>
 
         <label className="auth-form__label">
           Пароль
@@ -52,17 +85,26 @@ function Register() {
             className="popup-form__input popup-form__input_type_auth"
             type="password"
             placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
-            // value={password}
+            minLength="8"
+            value={values.password || ""}
+            onChange={handleChange}
+            autoComplete="on"
+            required
+            disabled={busy}
           />
         </label>
 
-        <span className="form-error"></span>
+        <span className="form-error">{errors.password}</span>
 
         <button
           type="submit"
-          className="auth-form__btn-submit auth-form__btn-submit_theme_white"
+          className={
+            "auth-form__btn-submit auth-form__btn-submit_theme_white" +
+            (!isValid || busy ? " auth-form__btn-submit_type_disabled" : "")
+          }
+          disabled={!isValid || busy}
         >
-          Зарегистрироваться
+          {!busy ? "Зарегистрироваться" : "Пожалуйста подождите..."}
         </button>
         <p className="auth-form__link-wrapper">
           Уже зарегистрированы?{" "}
@@ -77,6 +119,6 @@ function Register() {
       </form>
     </div>
   );
-}
+};
 
-export default withRouter(Register);
+export default Register;

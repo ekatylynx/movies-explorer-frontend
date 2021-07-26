@@ -2,7 +2,7 @@ import React from "react";
 import "./Promo.css";
 import promoLogo from "../../images/landing-logo.svg";
 
-function Promo() {
+const Promo = () => {
   return (
     <section className="promo">
       <div className="promo__wrapper">
@@ -13,13 +13,14 @@ function Promo() {
           <p className="promo__subtitle">
             Листайте ниже, чтобы узнать больше про этот проект и его создателя.
           </p>
-          <button className="promo__button">Узнать больше</button>
+          <a href="#about-project" className="promo__button">Узнать больше</a>
+
         </div>
 
         <img className="promo__logo" src={promoLogo} alt="promo logotype" />
       </div>
     </section>
   );
-}
+};
 
 export default Promo;

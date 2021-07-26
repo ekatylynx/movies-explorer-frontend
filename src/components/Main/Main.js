@@ -7,10 +7,10 @@ import AboutMe from "../../components/AboutMe/AboutMe";
 import Portfolio from "../../components/Portfolio/Portfolio";
 import Footer from "../../components/Footer/Footer";
 
-function Main() {
+const Main = () => {
   return (
     <>
-      <Header />
+      <Header dark={true} />
       <Promo />
       <NavTab />
       <AboutProject />
@@ -19,6 +19,6 @@ function Main() {
       <Footer />
     </>
   );
-}
+};
 
 export default Main;

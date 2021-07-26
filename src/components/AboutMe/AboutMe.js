@@ -2,7 +2,7 @@ import React from "react";
 import "./AboutMe.css";
 import avatar from "../../images/avatarstudent.jpg";
 
-function AboutMe() {
+const AboutMe = () => {
   return (
     <section className="aboutMe">
       <div className="aboutMe__wrapper">
@@ -47,6 +47,6 @@ function AboutMe() {
       </div>
     </section>
   );
-}
+};
 
 export default AboutMe;

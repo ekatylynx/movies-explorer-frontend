@@ -26,6 +26,12 @@
   margin-top: 5px;
 }
 
+.popup-form__input:disabled {
+  color: #c5c5c5;
+  background: #e6e6e5;
+}
+
+
 .auth-form {
   display: flex;
   flex-direction: column;
