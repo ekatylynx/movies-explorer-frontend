@@ -1,23 +1,11 @@
 # Дипломная работа@: "movies-explorer-frontend"
 
-Дипломный проект, (а конкретно - его frontend-часть) предоставляющий из себя сервис, в котором можно найти фильмы по запросу, с возможностью сохранения в личном кабинете.
-
-## Learn More
-
-[IP api backend](https://api.ekate.students.nomoredomains.monster/).
-
-[IP frontend](https://ekate.student.nomoredomains.rocks/).
-
-Maкет дизайна сайта (figma) [Figma layout website](https://www.figma.com/file/vkYPrriRBnqULtY8IGElVi/Diplomas?node-id=344%3A0).
-
-Сжатие картинок SVG [Link web](https://vecta.io/nano).
-
+Дипломный проект, фронт, предоставляющий из себя сервис, в котором можно найти фильмы по запросу, с возможностью сохранения в личном кабинете.
 
 ## Tools: 
 
-* Java Script (React.js) 
-* Webpack 
-* ?
+* Java Script (React.js)
+* Webpack
 
 
 ## Available Scripts
@@ -47,6 +35,3 @@ Maкет дизайна сайта (figma) [Figma layout website](https://www.fi
 
 См. раздел [deployment](https://facebook.github.io/create-react-app/docs/deployment) для получения дополнительной информации. 
 
-### `npm run eject`
-
-**Note: это односторонняя операция. После того, как вы введете «eject», вы не сможете вернуться! **

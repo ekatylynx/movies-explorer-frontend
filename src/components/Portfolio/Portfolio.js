@@ -11,7 +11,7 @@ const Portfolio = () => {
           <li className="portfolio__item">
             <a
               className="portfolio__link"
-              href="https://github.com/Hitomizavr/how-to-learn"
+              href="https://github.com/ekatylynx/how-to-learn"
             >
               <p className="portfolio__link-text">Статичный сайт</p>
               <img alt="arrow" src={arrowLink} />
@@ -23,7 +23,7 @@ const Portfolio = () => {
           <li className="portfolio__item">
             <a
               className="portfolio__link"
-              href="https://github.com/Hitomizavr/russian-travel"
+              href="https://github.com/ekatylynx/russian-travel"
             >
               <p className="portfolio__link-text">Адаптивный сайт</p>
               <img alt="arrow" src={arrowLink} />
@@ -35,7 +35,7 @@ const Portfolio = () => {
           <li className="portfolio__item">
             <a
               className="portfolio__link"
-              href="https://github.com/Hitomizavr/react-mesto-api-full"
+              href="https://github.com/ekatylynx/react-mesto-api-full"
             >
               <p className="portfolio__link-text">Одностраничное приложение</p>
               <img alt="arrow" src={arrowLink} />

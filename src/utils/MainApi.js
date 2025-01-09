@@ -93,7 +93,7 @@ class MainApi {
 }
 
 export default new MainApi({
-  baseUrl: "https://api.ekate.students.nomoredomains.monster",
+  // baseUrl: "https://api.ekate.students.nomoredomains.monster",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

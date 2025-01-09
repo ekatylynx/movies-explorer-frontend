@@ -23,7 +23,7 @@ const Footer = () => {
             <li className="footer__link-item">
               <a
                 className="footer__link-text"
-                href="https://github.com/Hitomizavr"
+                href="https://github.com/ekatylynx"
               >
                 Github
               </a>
